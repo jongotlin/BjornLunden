@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jongotlin/BjornLunden.svg?branch=main)](https://travis-ci.org/jongotlin/BjornLunden)
+
 # BjornLunden
 API wrapper for Björn Lundén
 
