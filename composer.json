@@ -1,5 +1,5 @@
 {
-  "name": "jongotlin/bjornlunden",
+  "name": "jongotlin/bjorn-lunden",
   "license": "MIT",
   "type": "package",
   "authors": [
@@ -10,7 +10,11 @@
   ],
   "autoload": {
     "psr-4": {
-      "JGI\\BjornLunden\\": "src",
+      "JGI\\BjornLunden\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
       "JGI\\BjornLunden\\Tests\\": "tests"
     }
   },
