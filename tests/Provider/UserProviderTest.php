@@ -196,11 +196,8 @@ class UserProviderTest extends TestCase
             "integration": false
         }]';
 
-        $bjornLunden = new BjornLunden(
-            $this->createHttpClientMock($json),
-            $this->createCredentialsMock()
-        );
-        $users = $bjornLunden->users()->all();
+        $bjornLunden = new BjornLunden($this->createHttpClientMock($json));
+        $users = $bjornLunden->users($this->createCredentialsMock())->all();
 
         $this->assertIsArray($users);
         $this->assertCount(8, $users);

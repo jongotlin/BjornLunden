@@ -26,11 +26,8 @@ class TokenProviderTest extends TestCase
             "scope":"oob"
         }';
 
-        $bjornLunden = new BjornLunden(
-            $this->createHttpClientMock($json),
-            $this->createCredentialsMock()
-        );
-        $token = $bjornLunden->tokens()->create();
+        $bjornLunden = new BjornLunden($this->createHttpClientMock($json));
+        $token = $bjornLunden->tokens($this->createCredentialsMock())->create();
 
         $this->assertInstanceOf(Token::class, $token);
 

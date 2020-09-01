@@ -17,18 +17,11 @@ class BjornLunden
     private $client;
 
     /**
-     * @var Credentials|null
-     */
-    private $credentials;
-
-    /**
      * @param Client $client
-     * @param Credentials $credentials
      */
-    public function __construct(Client $client, Credentials $credentials)
+    public function __construct(Client $client)
     {
         $this->client = $client;
-        $this->credentials = $credentials;
     }
 
     public function setClient(Client $client): void
@@ -37,34 +30,18 @@ class BjornLunden
     }
 
     /**
-     * @param Credentials $credentials
-     */
-    public function setCredentials(Credentials $credentials): void
-    {
-        $this->credentials = $credentials;
-    }
-
-    /**
-     * @return Credentials
-     */
-    public function getCredentials(): Credentials
-    {
-        return $this->credentials;
-    }
-
-    /**
      * @return UserProvider
      */
-    public function users(): UserProvider
+    public function users(Credentials $credentials): UserProvider
     {
-        return new UserProvider($this->client, $this->credentials);
+        return new UserProvider($this->client, $credentials);
     }
 
     /**
      * @return TokenProvider
      */
-    public function tokens(): TokenProvider
+    public function tokens(Credentials $credentials): TokenProvider
     {
-        return new TokenProvider($this->client, $this->credentials);
+        return new TokenProvider($this->client, $credentials);
     }
 }

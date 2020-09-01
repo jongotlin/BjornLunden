@@ -4,6 +4,7 @@ namespace JGI\BjornLunden\Provider;
 
 use GuzzleHttp\RequestOptions;
 use JGI\BjornLunden\BjornLunden;
+use JGI\BjornLunden\Credentials;
 use JGI\BjornLunden\Model\Token;
 use JGI\BjornLunden\Model\User;
 
