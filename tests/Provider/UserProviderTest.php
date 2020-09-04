@@ -7,6 +7,7 @@ namespace JGI\BjornLunden\Tests\Provider;
 use JGI\BjornLunden\BjornLunden;
 use JGI\BjornLunden\Credentials;
 use JGI\BjornLunden\Model\User;
+use JGI\BjornLunden\Provider\UserProvider;
 use PHPUnit\Framework\TestCase;
 
 class UserProviderTest extends TestCase
@@ -20,8 +21,8 @@ class UserProviderTest extends TestCase
     {
         $json = file_get_contents(__DIR__ . '/json/users.json');
 
-        $bjornLunden = new BjornLunden($this->createHttpClientMock($json));
-        $users = $bjornLunden->users($this->createCredentialsMock())->all();
+        $userProvider = new UserProvider($this->createHttpClientMock($json), $this->createCredentialsMock());
+        $users = $userProvider->all();
 
         $this->assertIsArray($users);
         $this->assertCount(8, $users);

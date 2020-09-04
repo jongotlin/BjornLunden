@@ -8,6 +8,7 @@ use JGI\BjornLunden\BjornLunden;
 use JGI\BjornLunden\Credentials;
 use JGI\BjornLunden\Model\Token;
 use JGI\BjornLunden\Model\User;
+use JGI\BjornLunden\Provider\TokenProvider;
 use PHPUnit\Framework\TestCase;
 
 class TokenProviderTest extends TestCase
@@ -26,8 +27,8 @@ class TokenProviderTest extends TestCase
             "scope":"oob"
         }';
 
-        $bjornLunden = new BjornLunden($this->createHttpClientMock($json));
-        $token = $bjornLunden->tokens($this->createCredentialsMock())->create();
+        $tokenProvider = new TokenProvider($this->createHttpClientMock($json), $this->createCredentialsMock());
+        $token = $tokenProvider->create();
 
         $this->assertInstanceOf(Token::class, $token);
 
