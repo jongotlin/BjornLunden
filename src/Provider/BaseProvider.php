@@ -7,6 +7,9 @@ use GuzzleHttp\RequestOptions;
 use JGI\BjornLunden\Credentials;
 use JGI\BjornLunden\Exception\BjornLundenException;
 use JGI\BjornLunden\BjornLunden;
+use JGI\BjornLunden\Exception\BjornLundenHttpException;
+use JGI\BjornLunden\Model\Error;
+use Psr\Http\Message\ResponseInterface;
 
 abstract class BaseProvider implements ProviderInterface
 {
@@ -42,19 +45,7 @@ abstract class BaseProvider implements ProviderInterface
             $this->createOptions()
         );
 
-        $json = $response->getBody()->getContents();
-
-        if ($response->getStatusCode() == 401) {
-            throw new BjornLundenException($json);
-        }
-
-        $data = json_decode($json, true);
-
-        if (array_key_exists('error', $data)) {
-            throw new BjornLundenException($data['error']);
-        }
-
-        return $data;
+        return $this->handleResponse($response);
     }
 
     /**
@@ -72,13 +63,32 @@ abstract class BaseProvider implements ProviderInterface
             ], $this->createOptions())
         );
 
-        $json = $response->getBody()->getContents();
+        return $this->handleResponse($response);
+    }
 
-        if ($response->getStatusCode() == 401) {
-            throw new BjornLundenException($json);
+    /**
+     * @param ResponseInterface $response
+     *
+     * @return array
+     */
+    protected function handleResponse(ResponseInterface $response): array
+    {
+        $json = $response->getBody()->__toString(); // Pointer is not rewinded in logger
+        $array = json_decode($json, true);
+
+        if (array_key_exists('error', $array)) {
+            $error = new Error(
+                new \DateTimeImmutable($array['timestamp']),
+                $array['status'],
+                $array['message'],
+                $array['error'],
+                $array['path']
+            );
+
+            throw new BjornLundenHttpException($error);
         }
 
-        return json_decode($json, true);
+        return $array;
     }
 
     /**
@@ -93,13 +103,7 @@ abstract class BaseProvider implements ProviderInterface
             $this->createOptions()
         );
 
-        $json = $response->getBody()->getContents();
-
-        if ($response->getStatusCode() == 401) {
-            throw new BjornLundenException($json);
-        }
-
-        return json_decode($json, true);
+        return $this->handleResponse($response);
     }
 
     /**

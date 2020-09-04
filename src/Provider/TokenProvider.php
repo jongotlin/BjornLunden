@@ -30,8 +30,7 @@ class TokenProvider extends BaseProvider implements ProviderInterface
             ]
         );
 
-        $json = $response->getBody()->getContents();
-        $data = json_decode($json, true);
+        $data = $this->handleResponse($response);
 
         $token = new Token(
             $data['access_token'],

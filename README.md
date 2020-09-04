@@ -9,7 +9,7 @@ API wrapper for Björn Lundén
 
 ## Example
 ```php
-$bjornLunden = new \JGI\BjornLunden\BjornLunden(new \GuzzleHttp\Client());
+$bjornLunden = new \JGI\BjornLunden\BjornLunden(new \GuzzleHttp\Client(['http_errors' => false]));
 $credentials = new \JGI\BjornLunden\Credentials($userKey, $clientId, $clientSecret);
 $token = $bjornLunden->tokens($credentials)->create();
 $credentials->setToken($token->getAccessToken());

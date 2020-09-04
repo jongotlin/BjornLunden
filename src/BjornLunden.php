@@ -3,8 +3,10 @@
 namespace JGI\BjornLunden;
 
 use GuzzleHttp\Client;
+use JGI\BjornLunden\Provider\CustomerInvoiceProvider;
 use JGI\BjornLunden\Provider\TokenProvider;
 use JGI\BjornLunden\Provider\UserProvider;
+use JGI\BjornLunden\Provider\CustomerProvider;
 
 class BjornLunden
 {
@@ -35,6 +37,22 @@ class BjornLunden
     public function users(Credentials $credentials): UserProvider
     {
         return new UserProvider($this->client, $credentials);
+    }
+
+    /**
+     * @return CustomerProvider
+     */
+    public function customers(Credentials $credentials): CustomerProvider
+    {
+        return new CustomerProvider($this->client, $credentials);
+    }
+
+    /**
+     * @return CustomerInvoiceProvider
+     */
+    public function customerInvoices(Credentials $credentials): CustomerInvoiceProvider
+    {
+        return new CustomerInvoiceProvider($this->client, $credentials);
     }
 
     /**

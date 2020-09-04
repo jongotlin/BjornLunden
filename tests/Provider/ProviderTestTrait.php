@@ -23,7 +23,7 @@ trait ProviderTestTrait
         $httpClientMock = $this->getMockBuilder(Client::class)->getMock();
         $responseMock = $this->getMockBuilder(ResponseInterface::class)->getMock();
         $streamMock = $this->getMockBuilder(StreamInterface::class)->getMock();
-        $streamMock->method('getContents')->willReturn($json);
+        $streamMock->method('__toString')->willReturn($json);
         $responseMock->method('getBody')->willReturn($streamMock);
         $httpClientMock->method('__call')->willReturn($responseMock);
 
