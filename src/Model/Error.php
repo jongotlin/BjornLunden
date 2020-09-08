@@ -84,4 +84,14 @@ class Error
     {
         return $this->path;
     }
+
+    /**
+     * Björn Lundén returns 500(!) instead of 404.
+     *
+     * @return bool
+     */
+    public function isProbablyNotFound(): bool
+    {
+        return $this->getMessage() == 'Resultatdata saknas';
+    }
 }

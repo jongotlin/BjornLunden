@@ -5,7 +5,7 @@ namespace JGI\BjornLunden\Exception;
 use Http\Client\Exception\TransferException;
 use JGI\BjornLunden\Model\Error;
 
-class BjornLundenHttpException extends TransferException
+class BjornLundenHttpException extends BjornLundenException
 {
     /**
      * @var Error

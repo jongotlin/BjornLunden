@@ -67,6 +67,24 @@ abstract class BaseProvider implements ProviderInterface
     }
 
     /**
+     * @param string $path
+     * @param array $data
+     *
+     * @return array|null
+     */
+    protected function put(string $path, array $data): ?array
+    {
+        $response = $this->client->put(
+            $this->getUrl($path),
+            array_merge([
+                RequestOptions::JSON => $data,
+            ], $this->createOptions())
+        );
+
+        return $this->handleResponse($response);
+    }
+
+    /**
      * @param ResponseInterface $response
      *
      * @return array

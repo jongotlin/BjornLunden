@@ -2,6 +2,7 @@
 
 namespace JGI\BjornLunden\Provider;
 
+use JGI\BjornLunden\Exception\BjornLundenHttpException;
 use JGI\BjornLunden\Model\Customer;
 use JGI\BjornLunden\Normalizer\CustomerNormalizer;
 
@@ -36,9 +37,36 @@ class CustomerProvider extends BaseProvider implements ProviderInterface
         return CustomerNormalizer::denormalize($result);
     }
 
-    public function find($id): Customer
+    /**
+     * @param Customer $customer
+     *
+     * @return Customer
+     */
+    public function update(Customer $customer)
     {
-        $result = $this->get('customer/' . $id);
+        $data = CustomerNormalizer::normalize($customer);
+
+        $result = $this->put('customer/', $data);
+
+        return CustomerNormalizer::denormalize($result);
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return Customer|null
+     */
+    public function find(string $id): ?Customer
+    {
+        try {
+            $result = $this->get('customer/' . $id);
+        } catch (BjornLundenHttpException $exception) {
+            if ($exception->getError()->isProbablyNotFound()) {
+                return null;
+            }
+
+            throw $exception;
+        }
 
         return CustomerNormalizer::denormalize($result);
     }
