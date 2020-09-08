@@ -69,4 +69,39 @@ class CustomerProviderTest extends TestCase
 
         $this->assertInstanceOf(Customer::class, $newCustomer);
     }
+
+    /**
+     * @test
+     */
+    public function it_updates_a_customer()
+    {
+        $json = file_get_contents(__DIR__ . '/json/customer.json');
+
+        $customerProvider = new CustomerProvider(
+            $this->createHttpClientMock($json),
+            $this->createCredentialsMock()
+        );
+
+        $customer = new Customer();
+        $newCustomer = $customerProvider->update($customer);
+
+        $this->assertInstanceOf(Customer::class, $newCustomer);
+    }
+
+    /**
+     * @test
+     */
+    public function it_updates_a_customer_from_array()
+    {
+        $json = file_get_contents(__DIR__ . '/json/customer.json');
+
+        $customerProvider = new CustomerProvider(
+            $this->createHttpClientMock($json),
+            $this->createCredentialsMock()
+        );
+
+        $newCustomer = $customerProvider->updateFromArray([]);
+
+        $this->assertInstanceOf(Customer::class, $newCustomer);
+    }
 }

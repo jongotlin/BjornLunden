@@ -2,6 +2,8 @@
 
 namespace JGI\BjornLunden\Provider;
 
+use GuzzleHttp\Client;
+use JGI\BjornLunden\Credentials;
 use JGI\BjornLunden\Exception\BjornLundenHttpException;
 use JGI\BjornLunden\Model\Customer;
 use JGI\BjornLunden\Normalizer\CustomerNormalizer;
@@ -11,7 +13,7 @@ class CustomerProvider extends BaseProvider implements ProviderInterface
     /**
      * @return Customer[]
      */
-    public function all()
+    public function all(): array
     {
         $data = $this->get('customer/');
 
@@ -28,7 +30,7 @@ class CustomerProvider extends BaseProvider implements ProviderInterface
      *
      * @return Customer
      */
-    public function create(Customer $customer)
+    public function create(Customer $customer): Customer
     {
         $data = CustomerNormalizer::normalize($customer);
 
@@ -42,11 +44,21 @@ class CustomerProvider extends BaseProvider implements ProviderInterface
      *
      * @return Customer
      */
-    public function update(Customer $customer)
+    public function update(Customer $customer): Customer
     {
         $data = CustomerNormalizer::normalize($customer);
 
-        $result = $this->put('customer/', $data);
+        return $this->updateFromArray($data);
+    }
+
+    /**
+     * @param array $array
+     *
+     * @return Customer
+     */
+    public function updateFromArray(array $array): Customer
+    {
+        $result = $this->put('customer/', $array);
 
         return CustomerNormalizer::denormalize($result);
     }
