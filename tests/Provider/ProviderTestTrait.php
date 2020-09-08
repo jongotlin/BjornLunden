@@ -18,13 +18,14 @@ trait ProviderTestTrait
      *
      * @return MockObject|HttpClient
      */
-    private function createHttpClientMock(?string $json): Client
+    private function createHttpClientMock(?string $json, $statusCode = 200): Client
     {
         $httpClientMock = $this->getMockBuilder(Client::class)->getMock();
         $responseMock = $this->getMockBuilder(ResponseInterface::class)->getMock();
         $streamMock = $this->getMockBuilder(StreamInterface::class)->getMock();
         $streamMock->method('__toString')->willReturn($json);
         $responseMock->method('getBody')->willReturn($streamMock);
+        $responseMock->method('getStatusCode')->willReturn($statusCode);
         $httpClientMock->method('__call')->willReturn($responseMock);
 
         return $httpClientMock;

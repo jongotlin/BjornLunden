@@ -6,6 +6,7 @@ namespace JGI\BjornLunden\Tests\Provider;
 
 use JGI\BjornLunden\BjornLunden;
 use JGI\BjornLunden\Credentials;
+use JGI\BjornLunden\Exception\BjornLundenHttpException;
 use JGI\BjornLunden\Model\Token;
 use JGI\BjornLunden\Model\User;
 use JGI\BjornLunden\Provider\TokenProvider;
@@ -38,5 +39,17 @@ class TokenProviderTest extends TestCase
         $this->assertInstanceOf(\DateTimeImmutable::class, $token->getExpiresAt());
         $this->assertGreaterThan(new \DateTime(), $token->getExpiresAt());
         $this->assertEquals('oob', $token->getScope());
+    }
+
+    /**
+     * @test
+     */
+    public function it_handles_authentication_required()
+    {
+        $this->expectException(BjornLundenHttpException::class);
+        $json = 'Authentication Required';
+
+        $tokenProvider = new TokenProvider($this->createHttpClientMock($json, 401), $this->createCredentialsMock());
+        $token = $tokenProvider->create();
     }
 }

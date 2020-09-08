@@ -93,6 +93,17 @@ abstract class BaseProvider implements ProviderInterface
     {
         $json = $response->getBody()->__toString(); // Pointer is not rewinded in logger
         $array = json_decode($json, true);
+        if (!is_array($array)) {
+            $error = new Error(
+                new \DateTimeImmutable(),
+                $response->getStatusCode(),
+                $json,
+                $response->getReasonPhrase(),
+                null
+            );
+
+            throw new BjornLundenHttpException($error);
+        }
 
         if (array_key_exists('error', $array)) {
             $error = new Error(

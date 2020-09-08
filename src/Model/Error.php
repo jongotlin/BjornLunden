@@ -20,12 +20,12 @@ class Error
     private $message;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $error;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $path;
 
@@ -33,10 +33,10 @@ class Error
      * @param \DateTimeImmutable $timestamp
      * @param int $status
      * @param string $message
-     * @param string $error
-     * @param string $path
+     * @param string|null $error
+     * @param string|null $path
      */
-    public function __construct(\DateTimeImmutable $timestamp, int $status, string $message, string $error, string $path)
+    public function __construct(\DateTimeImmutable $timestamp, int $status, string $message, ?string $error, ?string $path)
     {
         $this->timestamp = $timestamp;
         $this->status = $status;
@@ -70,17 +70,17 @@ class Error
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getError(): string
+    public function getError(): ?string
     {
         return $this->error;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPath(): string
+    public function getPath(): ?string
     {
         return $this->path;
     }
