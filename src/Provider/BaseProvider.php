@@ -54,13 +54,23 @@ abstract class BaseProvider implements ProviderInterface
      *
      * @return array|null
      */
-    protected function post(string $path, array $data): ?array
+    protected function post(string $path, array $data, \SplFileInfo $file = null): ?array
     {
+        $options = [
+            RequestOptions::JSON => $data,
+        ];
+
+        if ($file) {
+            $options[RequestOptions::MULTIPART] = [
+                [
+                    'name' => 'file',
+                    'contents' => fopen($file->getPathname(), 'r'),
+                ],
+            ];
+        }
         $response = $this->client->post(
             $this->getUrl($path),
-            array_merge([
-                RequestOptions::JSON => $data,
-            ], $this->createOptions())
+            array_merge($options, $this->createOptions())
         );
 
         return $this->handleResponse($response);
