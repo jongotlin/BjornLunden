@@ -56,13 +56,15 @@ abstract class BaseProvider implements ProviderInterface
      */
     protected function post(string $path, array $data, \SplFileInfo $file = null): ?array
     {
-        $options = [
-            RequestOptions::JSON => $data,
-        ];
+        $options = [];
+        if ($data) {
+            $options[RequestOptions::JSON] = $data;
+        };
 
         if ($file) {
             $options[RequestOptions::MULTIPART] = [
                 [
+                    'Content-type' => 'multipart/form-data',
                     'name' => 'file',
                     'contents' => fopen($file->getPathname(), 'r'),
                 ],

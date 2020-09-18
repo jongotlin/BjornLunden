@@ -37,9 +37,14 @@ class DocumentProvider extends BaseProvider implements ProviderInterface
      */
     public function createAndAddToInvoice(Document $document, int $invoiceNumber): CustomerInvoice
     {
+        $filename = $document->getFile()->getFilename();
+        if ($document->getFileName()) {
+            $filename = $document->getFilename();
+        }
+
         $result = $this->post(sprintf(
             'document/andAttachToCustomerInvoice/%s/%s',
-            $document->getFile()->getFilename(),
+            $filename,
             $invoiceNumber
         ), [], $document->getFile());
 

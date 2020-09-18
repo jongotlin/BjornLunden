@@ -15,6 +15,11 @@ class Document
     private $id;
 
     /**
+     * @var string|null
+     */
+    private $filename;
+
+    /**
      * @return \SplFileInfo|null
      */
     public function getFile(): ?\SplFileInfo
@@ -44,5 +49,21 @@ class Document
     public function setId(?string $id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    /**
+     * @param string|null $filename
+     */
+    public function setFilename(?string $filename): void
+    {
+        $this->filename = $filename;
     }
 }
