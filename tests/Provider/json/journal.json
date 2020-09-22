@@ -1,0 +1,49 @@
+{
+  "documentIds": [
+    340,
+    341
+  ],
+  "entryInfoBy": "PEM",
+  "entryInfoDate": "2006-04-06",
+  "financialYearId": "200507",
+  "journalEntryDate": "2006-03-01",
+  "journalEntryId": 14,
+  "journalEntryText": "Journaltext",
+  "journalId": "A",
+  "journalName": "Huvudserie",
+  "ledgerEntries": [
+    {
+      "accountId": "2440",
+      "amount": 234,
+      "costBearerId": "CB1",
+      "costCenterId": "CC1",
+      "date": "2010-01-08",
+      "projectId": "P1",
+      "quantity": 1,
+      "text": "[775] ACADEMUS"
+    },
+    {
+      "accountId": "2640",
+      "amount": -46.8,
+      "costBearerId": "CB1",
+      "costCenterId": "CC1",
+      "date": "2010-01-08",
+      "projectId": "P1",
+      "quantity": 1,
+      "text": "[775] ACADEMUS"
+    },
+    {
+      "accountId": "4010",
+      "amount": -187.2,
+      "costBearerId": "CB1",
+      "costCenterId": "CC1",
+      "date": "2010-01-08",
+      "projectId": "P1",
+      "quantity": 1,
+      "text": "[775] ACADEMUS"
+    }
+  ],
+  "lockingInfoBy": "null",
+  "lockingInfoDate": "2006-09-15",
+  "reportDate": "2003-09-10"
+}

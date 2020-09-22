@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use JGI\BjornLunden\Model\Document;
 use JGI\BjornLunden\Provider\CustomerInvoiceProvider;
 use JGI\BjornLunden\Provider\DocumentProvider;
+use JGI\BjornLunden\Provider\JournalProvider;
 use JGI\BjornLunden\Provider\TokenProvider;
 use JGI\BjornLunden\Provider\UserProvider;
 use JGI\BjornLunden\Provider\CustomerProvider;
@@ -65,6 +66,16 @@ class BjornLunden
     public function documents(Credentials $credentials): DocumentProvider
     {
         return new DocumentProvider($this->client, $credentials);
+    }
+
+    /**
+     * @param Credentials $credentials
+     *
+     * @return JournalProvider
+     */
+    public function journals(Credentials $credentials): JournalProvider
+    {
+        return new JournalProvider($this->client, $credentials);
     }
 
     /**
