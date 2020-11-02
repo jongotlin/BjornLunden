@@ -73,7 +73,7 @@ class CustomerProvider extends BaseProvider implements ProviderInterface
         try {
             $result = $this->get('customer/' . $id);
         } catch (BjornLundenHttpException $exception) {
-            if ($exception->getError()->isProbablyNotFound()) {
+            if ($exception->getError()->isProbablyNotFound() || $exception->getCode() == 400) {
                 return null;
             }
 
