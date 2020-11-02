@@ -129,6 +129,18 @@ abstract class BaseProvider implements ProviderInterface
             throw new BjornLundenHttpException($error);
         }
 
+        if (array_key_exists('status', $array) && $array['status'] == 'BAD_REQUEST') {
+            $error = new Error(
+                new \DateTimeImmutable($array['timestamp']),
+                400,
+                $array['message'],
+                $array['status'],
+                null
+            );
+
+            throw new BjornLundenHttpException($error);
+        }
+
         return $array;
     }
 
