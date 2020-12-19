@@ -30,6 +30,16 @@ class Article
     private $comment;
 
     /**
+     * @var string|null
+     */
+    private $costBearer;
+
+    /**
+     * @var string|null
+     */
+    private $costCenter;
+
+    /**
      * @var float|null
      */
     private $costPrice;
@@ -60,9 +70,24 @@ class Article
     private $descriptionUK;
 
     /**
+     * @var array
+     */
+    private $documentIds = [];
+
+    /**
+     * @var string|null
+     */
+    private $groupId;
+
+    /**
      * @var string|null
      */
     private $id;
+
+    /**
+     * @var bool
+     */
+    private $inactive = false;
 
     /**
      * @var string|null
@@ -80,9 +105,19 @@ class Article
     private $orderingQuantity;
 
     /**
+     * @var string|null
+     */
+    private $project;
+
+    /**
      * @var float|null
      */
     private $physicalStock;
+
+    /**
+     * @var string|null
+     */
+    private $purchaseAccount;
 
     /**
      * @var float|null
@@ -117,12 +152,32 @@ class Article
     /**
      * @var string|null
      */
+    private $stockPlacement;
+
+    /**
+     * @var string|null
+     */
     private $supplierArticleId;
 
     /**
      * @var string|null
      */
     private $supplierId;
+
+    /**
+     * @var bool
+     */
+    private $taxDeductable = false;
+
+    /**
+     * @var int|null
+     */
+    private $taxDeductionCode;
+
+    /**
+     * @var float|null
+     */
+    private $totalInvoicedAmount;
 
     /**
      * @var int|null
@@ -162,6 +217,11 @@ class Article
     /**
      * @var string|null
      */
+    private $vatAccount;
+
+    /**
+     * @var string|null
+     */
     private $vatCode;
 
     /**
@@ -173,6 +233,11 @@ class Article
      * @var float|null
      */
     private $weight;
+
+    /**
+     * @var float|null
+     */
+    private $weightedCostPrice;
 
     /**
      * @return string|null
@@ -252,6 +317,38 @@ class Article
     public function setComment(?string $comment): void
     {
         $this->comment = $comment;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCostBearer(): ?string
+    {
+        return $this->costBearer;
+    }
+
+    /**
+     * @param string|null $costBearer
+     */
+    public function setCostBearer(?string $costBearer): void
+    {
+        $this->costBearer = $costBearer;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCostCenter(): ?string
+    {
+        return $this->costCenter;
+    }
+
+    /**
+     * @param string|null $costCenter
+     */
+    public function setCostCenter(?string $costCenter): void
+    {
+        $this->costCenter = $costCenter;
     }
 
     /**
@@ -351,6 +448,38 @@ class Article
     }
 
     /**
+     * @return array
+     */
+    public function getDocumentIds(): array
+    {
+        return $this->documentIds;
+    }
+
+    /**
+     * @param array $documentIds
+     */
+    public function setDocumentIds(array $documentIds): void
+    {
+        $this->documentIds = $documentIds;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getGroupId(): ?string
+    {
+        return $this->groupId;
+    }
+
+    /**
+     * @param string|null $groupId
+     */
+    public function setGroupId(?string $groupId): void
+    {
+        $this->groupId = $groupId;
+    }
+
+    /**
      * @return string|null
      */
     public function getId(): ?string
@@ -364,6 +493,22 @@ class Article
     public function setId(?string $id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isInactive(): bool
+    {
+        return $this->inactive;
+    }
+
+    /**
+     * @param bool $inactive
+     */
+    public function setInactive(bool $inactive): void
+    {
+        $this->inactive = $inactive;
     }
 
     /**
@@ -415,6 +560,22 @@ class Article
     }
 
     /**
+     * @return string|null
+     */
+    public function getProject(): ?string
+    {
+        return $this->project;
+    }
+
+    /**
+     * @param string|null $project
+     */
+    public function setProject(?string $project): void
+    {
+        $this->project = $project;
+    }
+
+    /**
      * @return float|null
      */
     public function getPhysicalStock(): ?float
@@ -428,6 +589,22 @@ class Article
     public function setPhysicalStock(?float $physicalStock): void
     {
         $this->physicalStock = $physicalStock;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPurchaseAccount(): ?string
+    {
+        return $this->purchaseAccount;
+    }
+
+    /**
+     * @param string|null $purchaseAccount
+     */
+    public function setPurchaseAccount(?string $purchaseAccount): void
+    {
+        $this->purchaseAccount = $purchaseAccount;
     }
 
     /**
@@ -529,6 +706,22 @@ class Article
     /**
      * @return string|null
      */
+    public function getStockPlacement(): ?string
+    {
+        return $this->stockPlacement;
+    }
+
+    /**
+     * @param string|null $stockPlacement
+     */
+    public function setStockPlacement(?string $stockPlacement): void
+    {
+        $this->stockPlacement = $stockPlacement;
+    }
+
+    /**
+     * @return string|null
+     */
     public function getSupplierArticleId(): ?string
     {
         return $this->supplierArticleId;
@@ -556,6 +749,54 @@ class Article
     public function setSupplierId(?string $supplierId): void
     {
         $this->supplierId = $supplierId;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTaxDeductable(): bool
+    {
+        return $this->taxDeductable;
+    }
+
+    /**
+     * @param bool $taxDeductable
+     */
+    public function setTaxDeductable(bool $taxDeductable): void
+    {
+        $this->taxDeductable = $taxDeductable;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getTaxDeductionCode(): ?int
+    {
+        return $this->taxDeductionCode;
+    }
+
+    /**
+     * @param int|null $taxDeductionCode
+     */
+    public function setTaxDeductionCode(?int $taxDeductionCode): void
+    {
+        $this->taxDeductionCode = $taxDeductionCode;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getTotalInvoicedAmount(): ?float
+    {
+        return $this->totalInvoicedAmount;
+    }
+
+    /**
+     * @param float|null $totalInvoicedAmount
+     */
+    public function setTotalInvoicedAmount(?float $totalInvoicedAmount): void
+    {
+        $this->totalInvoicedAmount = $totalInvoicedAmount;
     }
 
     /**
@@ -687,6 +928,22 @@ class Article
     }
 
     /**
+     * @return string|null
+     */
+    public function getVatAccount(): ?string
+    {
+        return $this->vatAccount;
+    }
+
+    /**
+     * @param string|null $vatAccount
+     */
+    public function setVatAccount(?string $vatAccount): void
+    {
+        $this->vatAccount = $vatAccount;
+    }
+
+    /**
      * @return float|null
      */
     public function getVolume(): ?float
@@ -716,5 +973,21 @@ class Article
     public function setWeight(?float $weight): void
     {
         $this->weight = $weight;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getWeightedCostPrice(): ?float
+    {
+        return $this->weightedCostPrice;
+    }
+
+    /**
+     * @param float|null $weightedCostPrice
+     */
+    public function setWeightedCostPrice(?float $weightedCostPrice): void
+    {
+        $this->weightedCostPrice = $weightedCostPrice;
     }
 }
