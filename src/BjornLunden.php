@@ -10,6 +10,7 @@ use JGI\BjornLunden\Provider\JournalProvider;
 use JGI\BjornLunden\Provider\TokenProvider;
 use JGI\BjornLunden\Provider\UserProvider;
 use JGI\BjornLunden\Provider\CustomerProvider;
+use JGI\BjornLunden\Provider\ArticleProvider;
 
 class BjornLunden
 {
@@ -40,6 +41,14 @@ class BjornLunden
     public function users(Credentials $credentials): UserProvider
     {
         return new UserProvider($this->client, $credentials);
+    }
+
+    /**
+     * @return ArticlesProvider
+     */
+    public function articles(Credentials $credentials): ArticleProvider
+    {
+        return new ArticleProvider($this->client, $credentials);
     }
 
     /**
