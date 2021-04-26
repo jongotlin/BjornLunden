@@ -43,7 +43,7 @@ class DocumentProvider extends BaseProvider implements ProviderInterface
         }
 
         $result = $this->post(sprintf(
-            'document/andAttachToCustomerInvoice/%s/%s',
+            'document/andAttachToCustomerInvoice/%s/%s/ ',
             $filename,
             $invoiceNumber
         ), [], $document->getFile());
