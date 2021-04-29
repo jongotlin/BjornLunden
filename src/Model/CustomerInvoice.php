@@ -140,6 +140,11 @@ class CustomerInvoice
     private $registeredByUser;
 
     /**
+     * @var LedgerEntry[]
+     */
+    private $subLedgerEntries = [];
+
+    /**
      * @var string|null
      */
     private $type;
@@ -574,6 +579,22 @@ class CustomerInvoice
     public function setRegisteredByUser(?string $registeredByUser): void
     {
         $this->registeredByUser = $registeredByUser;
+    }
+
+    /**
+     * @return LedgerEntry[]
+     */
+    public function getSubLedgerEntries(): array
+    {
+        return $this->subLedgerEntries;
+    }
+
+    /**
+     * @param LedgerEntry[] $subLedgerEntries
+     */
+    public function setSubLedgerEntries(array $subLedgerEntries): void
+    {
+        $this->subLedgerEntries = $subLedgerEntries;
     }
 
     /**
