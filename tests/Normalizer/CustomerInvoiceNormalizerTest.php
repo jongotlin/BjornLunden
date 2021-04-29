@@ -73,6 +73,7 @@ class CustomerInvoiceNormalizerTest extends TestCase
             'projectId' => 'P21',
             'receivableAccount' => '1510',
             'registeredByUser' => 'PEM',
+            'subLedgerEntries' => [],
             'type' => 'Manuell',
         ];
 
