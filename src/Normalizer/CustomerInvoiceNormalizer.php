@@ -13,6 +13,11 @@ class CustomerInvoiceNormalizer
      */
     public static function normalize(CustomerInvoice $customerInvoice): array
     {
+        $subLedgerEntries = [];
+        foreach ($customerInvoice->getSubLedgerEntries() as $subLedgerEntry) {
+            $subLedgerEntries[] = LedgerEntryNormalizer::normalize($subLedgerEntry);
+        }
+
         return [
             'amountInLocalCurrency' => $customerInvoice->getAmountInLocalCurrency() ? $customerInvoice->getAmountInLocalCurrency() / 100 : null,
             'amountInOriginalCurrency' => $customerInvoice->getAmountInOriginalCurrency() ? $customerInvoice->getAmountInOriginalCurrency() / 100 : null,
@@ -41,6 +46,7 @@ class CustomerInvoiceNormalizer
             'projectId' => $customerInvoice->getProjectId(),
             'receivableAccount' => $customerInvoice->getReceivableAccount(),
             'registeredByUser' => $customerInvoice->getRegisteredByUser(),
+            'subLedgerEntries' => $subLedgerEntries,
             'type' => $customerInvoice->getType(),
         ];
     }

@@ -43,7 +43,7 @@ class CustomerInvoiceProvider extends BaseProvider implements ProviderInterface
      */
     public function find($invoiceNumber): CustomerInvoice
     {
-        $result = $this->get('customer/' . $invoiceNumber);
+        $result = $this->get('customerinvoice/' . $invoiceNumber);
 
         return CustomerInvoiceNormalizer::denormalize($result);
     }
