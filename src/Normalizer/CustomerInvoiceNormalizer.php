@@ -71,7 +71,11 @@ class CustomerInvoiceNormalizer
         if ($data['amountPaidInOriginalCurrency']) {
             $customerInvoice->setAmountPaidInOriginalCurrency($data['amountPaidInOriginalCurrency'] * 100);
         }
-        $customerInvoice->setAssociatedCustomerPayments($data['associatedCustomerPayments']);
+
+        if (isset($data['associatedCustomerPayments'])) {
+            $customerInvoice->setAssociatedCustomerPayments($data['associatedCustomerPayments']);
+        }
+
         $customerInvoice->setCostBearerId($data['costBearerId']);
         $customerInvoice->setCostCenterId($data['costCenterId']);
         $customerInvoice->setCurrency($data['currency']);
