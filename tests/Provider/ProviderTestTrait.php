@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace JGI\BjornLunden\Tests\Provider;
 
-use Http\Client\HttpClient;
 use GuzzleHttp\Client;
 use JGI\BjornLunden\Credentials;
-use PHPUnit\Framework\MockObject\MockObject;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\ResponseInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 
 trait ProviderTestTrait
 {
     /**
      * @param string|null $json
      *
-     * @return MockObject|HttpClient
+     * @return MockObject|Client
      */
     private function createHttpClientMock(?string $json, $statusCode = 200): Client
     {
@@ -26,7 +25,10 @@ trait ProviderTestTrait
         $streamMock->method('__toString')->willReturn($json);
         $responseMock->method('getBody')->willReturn($streamMock);
         $responseMock->method('getStatusCode')->willReturn($statusCode);
-        $httpClientMock->method('__call')->willReturn($responseMock);
+        $httpClientMock->method('get')->willReturn($responseMock);
+        $httpClientMock->method('post')->willReturn($responseMock);
+        $httpClientMock->method('put')->willReturn($responseMock);
+        $httpClientMock->method('delete')->willReturn($responseMock);
 
         return $httpClientMock;
     }
